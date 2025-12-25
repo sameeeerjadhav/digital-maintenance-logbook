@@ -1,0 +1,341 @@
+.view-hods {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  margin: 0;
+  color: #1e3a8a;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.actions input {
+  min-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.actions input:focus {
+  outline: none;
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+button.refresh {
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.refresh[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.table-wrap {
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: #e0e7ff;
+  color: #1e3a8a;
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+  border-bottom: 1px solid #c7d2fe;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+button.danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.danger:hover {
+  background: #b91c1c;
+}
+
+.alert.error {
+  background: #fee2e2;
+  border-left: 4px solid #b91c1c;
+  color: #991b1b;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.state {
+  text-align: center;
+  padding: 24px 0;
+  color: #6b7280;
+}
+
+.loading {
+  color: #1f2937;
+}
+
+.empty {
+  color: #6b7280;
+}
+.view-hods-container {
+  background: #f8fafc;
+  padding: 30px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #1e3a8a;
+  font-size: 22px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.actions button,
+.add-btn {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.actions button {
+  background: #1e40af;
+  color: white;
+}
+
+.actions button:hover {
+  background: #1e3a8a;
+  transform: translateY(-1px);
+}
+
+.actions button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.add-btn {
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.add-btn:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+/* Table Wrapper */
+.hod-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hod-table thead {
+  background: #e0e7ff;
+}
+
+.hod-table th,
+.hod-table td {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.hod-table th {
+  color: #1e3a8a;
+  font-weight: 600;
+  border-bottom: 1px solid #c7d2fe;
+}
+
+.hod-table td {
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+/* Alternate row color */
+.hod-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* Row hover effect */
+.hod-table tbody tr:hover {
+  background: #f1f5f9;
+  transition: background 0.2s ease;
+}
+
+/* Action Buttons */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+/* Empty and Loading States */
+.empty,
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.loading::after {
+  content: " ⏳";
+}
+
+/* Error Alert */
+.alert.error {
+  background: #fee2e2;
+  border-left: 4px solid #b91c1c;
+  color: #991b1b;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hod-table th,
+  .hod-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .add-btn,
+  .actions button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .actions-cell {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+/* Subtle animation for table appearance */
+@keyframes fadeInTable {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hod-table {
+  animation: fadeInTable 0.3s ease-out;
+}

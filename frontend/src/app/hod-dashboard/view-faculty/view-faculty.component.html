@@ -1,0 +1,55 @@
+<div class="view-container view-faculty">
+  <div class="header">
+    <h2>Faculty</h2>
+    <div class="actions">
+      <input
+        type="text"
+        placeholder="Search by name, email, faculty ID, or dept"
+        [(ngModel)]="search"
+        (ngModelChange)="onSearchChange()"
+      />
+      <button class="refresh" (click)="load()" [disabled]="loading">
+        {{ loading ? 'Refreshing…' : 'Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="alert error" *ngIf="error">{{ error }}</div>
+
+  <div class="table-wrap" *ngIf="!loading && filtered.length > 0; else emptyOrLoading">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px;">ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Faculty ID</th>
+          <th>Department</th>
+          <th style="width:120px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of filtered; trackBy: trackById">
+          <td>{{ f.id }}</td>
+          <td>{{ f.name }}</td>
+          <td>{{ f.email }}</td>
+          <td>{{ f.collegeId }}</td>
+          <td>{{ f.department }}</td>
+          <td class="actions-cell">
+            <!-- <button class="secondary">Edit</button> -->
+            <button class="danger" (click)="delete(f.id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyOrLoading>
+    <div class="state">
+      <div *ngIf="loading" class="loading">Loading faculty…</div>
+      <div *ngIf="!loading && filtered.length === 0" class="empty">
+        No faculty found. Try adjusting your search or add a new faculty.
+      </div>
+    </div>
+  </ng-template>
+</div>

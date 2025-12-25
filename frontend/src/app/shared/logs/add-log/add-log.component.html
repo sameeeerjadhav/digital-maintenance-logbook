@@ -1,0 +1,146 @@
+<div class="add-log-card">
+  <h2>Add Maintenance Log</h2>
+
+  <form (ngSubmit)="submitLog()" #logForm="ngForm">
+    <!-- Row 1 -->
+    <div class="grid">
+      <div class="field">
+        <label for="machineName">Machine Name</label>
+        <input
+          id="machineName"
+          name="machineName"
+          type="text"
+          [(ngModel)]="form.machineName"
+          required
+          placeholder="e.g., Dell Optiplex / Epson EB-X41"
+        />
+      </div>
+
+      <div class="field">
+        <label for="deviceId">Device ID</label>
+        <input
+          id="deviceId"
+          name="deviceId"
+          type="number"
+          [(ngModel)]="form.deviceId"
+          required
+          placeholder="e.g., 101"
+        />
+      </div>
+
+      <div class="field">
+        <label for="maintenanceDate">Date</label>
+        <input
+          id="maintenanceDate"
+          name="maintenanceDate"
+          type="date"
+          [(ngModel)]="form.maintenanceDate"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="status">Status</label>
+        <select id="status" name="status" [(ngModel)]="form.status" required>
+          <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 2 (optional relations) -->
+    <div class="grid">
+      <div class="field">
+        <label for="facultyId">Faculty ID (optional)</label>
+        <input id="facultyId" name="facultyId" type="number" [(ngModel)]="form.facultyId" />
+      </div>
+
+      <div class="field">
+        <label for="hodId">HOD ID (optional)</label>
+        <input id="hodId" name="hodId" type="number" [(ngModel)]="form.hodId" />
+      </div>
+
+      <div class="field">
+        <label for="studentId">Student ID (optional)</label>
+        <input id="studentId" name="studentId" type="number" [(ngModel)]="form.studentId" />
+      </div>
+    </div>
+
+    <!-- Issue Details -->
+    <div class="field">
+      <label for="issueDescription">Issue Description</label>
+      <textarea
+        id="issueDescription"
+        name="issueDescription"
+        [(ngModel)]="form.issueDescription"
+        required
+        placeholder="Describe the problem clearly"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label for="actionTaken">Action Taken (optional)</label>
+      <textarea
+        id="actionTaken"
+        name="actionTaken"
+        [(ngModel)]="form.actionTaken"
+        placeholder="What was done so far"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <label for="remarks">Remarks (optional)</label>
+      <input
+        id="remarks"
+        name="remarks"
+        type="text"
+        [(ngModel)]="form.remarks"
+        placeholder="Any notes to add"
+      />
+    </div>
+
+    <!-- Mode Toggle -->
+    <div class="mode-toggle">
+      <button type="button" class="tab" [class.active]="imageMode === 'upload'" (click)="onModeChange('upload')">
+        Add Image
+      </button>
+      <button type="button" class="tab" [class.active]="imageMode === 'camera'" (click)="onModeChange('camera')">
+        Take Image
+      </button>
+    </div>
+
+    <!-- Upload Mode -->
+    <div class="field file-field" *ngIf="imageMode === 'upload'">
+      <label for="image">Attach Device Image (optional)</label>
+      <input id="image" name="image" type="file" accept="image/*" capture="environment" (change)="onImageSelected($event)" />
+
+      <div class="preview" *ngIf="form.imageDataUrl">
+        <img [src]="form.imageDataUrl" alt="attachment preview" />
+        <button type="button" class="btn-outline" (click)="clearImage()">Remove</button>
+      </div>
+    </div>
+
+    <!-- Camera Mode -->
+    <div class="camera-wrapper" *ngIf="imageMode === 'camera'">
+      <div class="camera">
+        <video #videoRef class="video" autoplay playsinline></video>
+        <canvas #canvasRef class="hidden-canvas"></canvas>
+      </div>
+
+      <div class="cam-actions">
+        <button type="button" class="btn" (click)="captureFrame()">Capture</button>
+        <button type="button" class="btn-outline" (click)="clearImage()">Clear</button>
+      </div>
+
+      <div class="preview" *ngIf="form.imageDataUrl">
+        <img [src]="form.imageDataUrl" alt="captured preview" />
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn-primary" type="submit" [disabled]="!logForm.form.valid || loading">
+      {{ loading ? 'Submitting…' : 'Submit Log' }}
+    </button>
+  </form>
+
+  <p class="msg" *ngIf="message">{{ message }}</p>
+</div>

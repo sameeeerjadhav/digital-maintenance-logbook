@@ -1,0 +1,169 @@
+/* === Layout === */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: "Poppins", "Inter", sans-serif;
+}
+
+/* === Sidebar === */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  color: #ffffff;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 14px rgba(30, 64, 175, 0.15);
+  position: relative;
+  z-index: 10;
+}
+
+/* Sidebar Header */
+.sidebar h2 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 26px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  position: relative;
+}
+
+/* Small underline glow under "Admin Panel" */
+.sidebar h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #93c5fd, #60a5fa);
+  border-radius: 2px;
+}
+
+/* === Section Titles === */
+.sidebar .section {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #bfdbfe;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* === Links === */
+.sidebar nav a {
+  display: block;
+  color: #e0e7ff;
+  text-decoration: none;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Hover and active effects */
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.sidebar nav a.active {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+}
+
+/* Active indicator bar */
+.sidebar nav a.active::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  border-radius: 2px;
+  background: #60a5fa;
+}
+
+/* === Scrollable Sidebar (if many items) === */
+.sidebar nav {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.sidebar nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar nav::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+/* === Main Content === */
+.content {
+  flex: 1;
+  padding: 28px 32px;
+  background: #f9fbff;
+  overflow-y: auto;
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    padding: 18px 14px;
+  }
+
+  .sidebar h2 {
+    font-size: 1.2rem;
+  }
+
+  .sidebar nav a {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 10px rgba(30, 64, 175, 0.1);
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow: visible;
+  }
+
+  .sidebar nav a {
+    flex: 1 1 45%;
+    text-align: center;
+    margin: 2px 0;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}

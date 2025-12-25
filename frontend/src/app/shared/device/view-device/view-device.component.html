@@ -1,0 +1,59 @@
+<div class="view-container">
+  <h2>View Devices</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by name, type, serial, lab or status"
+    />
+  </div>
+
+  <div *ngIf="loading" class="info">Loading devices…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="!loading && filteredDevices.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Device Name</th>
+        <th>Type</th>
+        <th>Serial No.</th>
+        <th>Lab</th>
+        <th>Status</th>
+        <th>QR</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let device of filteredDevices">
+        <td>{{ device.id }}</td>
+        <td>{{ device.deviceName }}</td>
+        <td>{{ device.deviceType }}</td>
+        <td>{{ device.serialNumber }}</td>
+        <td>{{ device.labName }}</td>
+        <td>{{ device.status }}</td>
+        <td>
+          <ng-container *ngIf="device.qrCodePath; else noqr">
+            <img
+              [src]="device.qrCodePath"
+              alt="QR"
+              style="width:48px;height:48px;object-fit:contain;border:1px solid #eee;border-radius:4px;"
+            />
+          </ng-container>
+          <ng-template #noqr>—</ng-template>
+        </td>
+        <td>{{ device.createdAt | date: 'short' }}</td>
+        <td>
+          <button class="delete-btn" (click)="deleteDevice(device.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && filteredDevices.length === 0" class="no-data">
+    No matching devices found
+  </div>
+</div>

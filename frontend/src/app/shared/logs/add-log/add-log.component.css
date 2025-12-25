@@ -1,0 +1,359 @@
+:root{
+  --blue-500: #1e66f3;
+  --blue-600: #0f4ed6;
+  --muted: #eef5ff;
+  --accent: #d9e8ff;
+  --danger: #d83a3a;
+  --text: #0e2340;
+}
+
+/* page background (keeps consistent theme) */
+body {
+  background: linear-gradient(180deg,#fbfdff 0%, #f4f8ff 100%);
+  font-family: "Poppins", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* container */
+.add-log-card {
+  max-width: 980px;
+  margin: 34px auto;
+  padding: 20px 24px;
+  background: transparent; /* flat look */
+}
+
+/* heading with left accent */
+.add-log-card h2{
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--blue-600);
+  margin: 6px 0 18px 0;
+  padding-left: 10px;
+  border-left: 5px solid var(--blue-500);
+}
+
+/* form layout: two fields per row using .grid rows */
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px 0;
+}
+
+/* .grid creates a row with 4 columns that collapse to 2 fields per row */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* flexible: we control .field span */
+  column-gap: 16px;
+  row-gap: 12px;
+  align-items: start;
+}
+
+/* typical field, default span 1 column (adjust below) */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  grid-column: span 1;
+}
+
+/* make date and status occupy one column each but in our compact layout we'll span 1/2 width:
+   to achieve "two fields per line" we set most fields to span 2 cols so 2 per row */
+.grid .field {
+  grid-column: span 2;
+}
+
+/* For the second .grid which has three optional id fields, keep them each half width */
+.grid:nth-of-type(2) .field {
+  grid-column: span 1; /* facultyId, hodId, studentId -> three in a row; they will wrap nicely */
+}
+
+/* labels */
+label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #13407a;
+}
+
+/* inputs, select, textarea */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  padding: 8px 10px;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #e1efff;
+  outline: none;
+  border-radius: 6px;
+  transition: border-color 180ms ease, transform 150ms ease, box-shadow 180ms ease;
+}
+
+/* textarea slightly taller */
+textarea {
+  min-height: 86px;
+  resize: vertical;
+  padding-top: 10px;
+}
+
+/* focus style */
+input:focus, select:focus, textarea:focus {
+  border-image: linear-gradient(90deg,#66a8ff,var(--blue-600)) 1;
+  box-shadow: 0 8px 20px rgba(15,78,214,0.06);
+  transform: translateY(-2px);
+  caret-color: var(--blue-600);
+}
+
+/* file input: visually tidy */
+input[type="file"] {
+  padding: 8px 6px;
+  cursor: pointer;
+}
+
+/* preview area */
+.preview {
+  margin-top: 8px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.preview img {
+  width: 128px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(15,78,214,0.06);
+  box-shadow: 0 6px 18px rgba(15,78,214,0.03);
+}
+
+/* small outline button for removing image */
+.btn-outline {
+  background: transparent;
+  color: var(--blue-600);
+  border: 1.6px solid rgba(15,78,214,0.12);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* mode toggle tabs (upload / camera) */
+.mode-toggle {
+  display: inline-flex;
+  gap: 8px;
+  margin: 8px 0 4px 0;
+}
+.mode-toggle .tab {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(15,78,214,0.06);
+  cursor: pointer;
+  font-weight: 700;
+  color: #13407a;
+  transition: background 160ms ease, transform 120ms ease;
+}
+.mode-toggle .tab.active {
+  background: linear-gradient(90deg,#dbeaff,#c7ddff);
+  color: var(--blue-600);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15,78,214,0.04);
+}
+
+/* camera wrapper */
+.camera-wrapper {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 220px 1fr; /* camera preview on left, controls on right */
+  gap: 12px;
+  align-items: start;
+}
+
+/* video area */
+.camera {
+  width: 220px;
+  height: 160px;
+  background: #f7fbff;
+  border-radius: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border: 1px solid rgba(15,78,214,0.04);
+}
+.camera .video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+}
+
+/* canvas used for capture (hidden) */
+.hidden-canvas {
+  display: none;
+}
+
+/* camera action buttons (capture/clear) */
+.cam-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap:wrap;
+}
+.cam-actions .btn {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#66a8ff,var(--blue-600));
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+/* primary submit button spanning full width */
+.btn-primary {
+  grid-column: 1 / -1;
+  width: 200px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#66a8ff,var(--blue-600));
+  color: #fff;
+  border: none;
+  font-weight: 800;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor:not-allowed;
+}
+
+/* message below form */
+.msg {
+  margin-top: 12px;
+  color: #11416a;
+  font-weight: 700;
+}
+
+/* small utility: make deviceId input not too wide */
+input[type="number"] {
+  max-width: 260px;
+}
+
+/* responsive: adapt grid so two fields per row on most screens, stack on small */
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid:nth-of-type(2) .field { grid-column: span 1; } /* keep optional ids compact */
+  .camera-wrapper { grid-template-columns: 180px 1fr; }
+  .camera { width: 180px; height: 140px; }
+  .preview img { width: 110px; height: 82px; }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .field { grid-column: span 1; }
+  .camera-wrapper { grid-template-columns: 1fr; }
+  .camera { width: 100%; height: 190px; }
+  .btn-primary { width: 100%; }
+  .preview img { width: 120px; height: 90px; }
+}
+/* Camera wrapper */
+.camera-wrapper {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Camera area */
+.camera {
+  width: 260px;
+  height: 190px;
+  background: #f7fbff;
+  border-radius: 10px;
+  border: 1.5px solid rgba(15,78,214,0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(15,78,214,0.05);
+}
+
+.camera video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Capture and Clear buttons */
+.cam-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+/* Primary button (Capture) */
+.cam-actions .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #66a8ff, var(--blue-600));
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 102, 243, 0.12);
+  transition: all 0.25s ease;
+}
+
+.cam-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 102, 243, 0.16);
+}
+
+/* Secondary button (Clear) */
+.cam-actions .btn-outline {
+  border: 1.8px solid rgba(30,102,243,0.15);
+  background: transparent;
+  color: var(--blue-600);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cam-actions .btn-outline:hover {
+  background: rgba(30,102,243,0.08);
+  transform: translateY(-2px);
+}
+
+/* Preview after capture */
+.camera-wrapper .preview {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.camera-wrapper .preview img {
+  width: 180px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(15,78,214,0.08);
+  margin-bottom: 6px;
+}

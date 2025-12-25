@@ -1,0 +1,229 @@
+:root {
+  --blue-500: #1e66f3;
+  --blue-600: #0f4ed6;
+  --muted: #eef5ff;
+  --accent: #d9e8ff;
+  --danger: #d83a3a;
+}
+
+/* Page background */
+body {
+  background: linear-gradient(180deg, #fbfdff 0%, #f2f7ff 100%);
+  font-family: "Inter", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #0e2340;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.add-student-container {
+  max-width: 980px;
+  margin: 48px auto;
+  padding: 24px 32px;
+}
+
+/* Keep the visual "card" minimal and flat */
+.form-card {
+  background: transparent; /* flat look - no heavy card */
+  padding: 10px 6px 0 6px;
+}
+
+/* Title & subtitle */
+.form-card h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--blue-600);
+  margin: 6px 0 12px 0;
+}
+.form-card h2::before {
+  content: "";
+  width: 6px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--blue-500), var(--blue-600));
+  border-radius: 4px;
+  transform: skewY(-8deg);
+  display: block;
+}
+.form-card .subtitle {
+  color: #3b587e;
+  font-weight: 600;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+/* Two-column grid on desktop */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  row-gap: 18px;
+  align-items: start;
+}
+
+/* Make some form groups span both columns (use .full) */
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+/* Label styling */
+label {
+  display: block;
+  font-size: 0.86rem;
+  color: #13407a;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 0.35px;
+}
+
+/* Inputs & selects: flat with underline baseline */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px 8px;
+  font-size: 0.95rem;
+  color: #0b2540;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #d7e9ff;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 150ms ease;
+  border-radius: 6px;
+}
+
+/* Placeholder */
+input::placeholder {
+  color: #9fb0c9;
+}
+
+/* Focus state */
+input:focus,
+select:focus {
+  border-image: linear-gradient(90deg, #66a8ff, var(--blue-600)) 1;
+  box-shadow: 0 6px 18px rgba(15,78,214,0.06);
+  transform: translateY(-2px);
+  caret-color: var(--blue-600);
+}
+
+/* Styled select with SVG chevron */
+.form-card select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 40px; /* space for arrow */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%230f4ed6' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 14px) center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+
+/* Option styling (limited support in some browsers) */
+.form-card select option {
+  padding: 8px;
+  font-weight: 600;
+}
+
+/* Error text */
+.error small,
+.server-error {
+  color: var(--danger);
+  font-size: 0.82rem;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Server error block */
+.server-error {
+  grid-column: 1 / -1;
+  background: rgba(216,58,58,0.05);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(216,58,58,0.07);
+  margin-top: 6px;
+}
+
+/* Button row: two half-width buttons, centered */
+.button-row {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+/* Shared button base */
+.button-row button {
+  flex: 1 1 45%;
+  max-width: 320px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  border: none;
+}
+
+/* Primary Save button */
+.button-row button[type="submit"] {
+  background: linear-gradient(90deg, rgba(102,168,255,1), rgba(30,102,243,1));
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(30,102,243,0.08);
+}
+
+/* Secondary Reset button */
+.button-row button.secondary {
+  background: transparent;
+  color: var(--blue-600);
+  border: 2px solid rgba(30,102,243,0.12);
+}
+
+/* Hover effects */
+.button-row button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(30,102,243,0.10);
+}
+.button-row button.secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(30,102,243,0.06);
+}
+
+/* Disabled */
+button[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive: single column on smaller screens */
+@media (max-width: 880px) {
+  .add-student-container { padding: 18px; max-width: 720px; }
+  form { grid-template-columns: 1fr; column-gap: 0; }
+  .form-group.full { grid-column: 1 / -1; }
+  .button-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .button-row button { width: 100%; max-width: none; }
+}
+
+/* Small polish */
+.form-card .hint {
+  font-size: 0.85rem;
+  color: #56719a;
+  margin-top: 6px;
+}
+
+/* For better keyboard focus visibility */
+button:focus, input:focus, select:focus {
+  outline: 3px solid rgba(30,102,243,0.08);
+  outline-offset: 2px;
+}

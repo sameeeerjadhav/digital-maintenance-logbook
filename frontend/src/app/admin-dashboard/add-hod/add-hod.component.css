@@ -1,0 +1,286 @@
+/* ===== page background (subtle texture + gradient) ===== */
+:root{
+  --blue-500: #1e66f3;
+  --blue-600: #0f4ed6;
+  --muted: #eef5ff;
+  --accent: #d9e8ff;
+  --danger: #d83a3a;
+}
+
+/* full-page soft background so form floats without a card */
+body {
+  background: linear-gradient(180deg, #fbfdff 0%, #f2f7ff 100%);
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(30,102,243,0.03) 0, transparent 30%),
+    linear-gradient(120deg, rgba(30,102,243,0.02), transparent 50%);
+  font-family: "Inter", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #0e2340;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* container: full-width, aligned with sidebar layout you already have */
+.hod-form-container{
+  max-width: 980px;           /* wider than before for two-column layout */
+  margin: 48px auto;
+  padding: 28px 36px;
+  background: transparent;
+}
+
+/* Decorative left accent bar next to title (not a card) */
+.hod-form-container h2{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--blue-600);
+  margin: 8px 0 28px 0;
+  position: relative;
+}
+
+/* small angled accent */
+.hod-form-container h2::before{
+  content: "";
+  width: 6px;
+  height: 44px;
+  background: linear-gradient(180deg, var(--blue-500), var(--blue-600));
+  border-radius: 4px;
+  transform: skewY(-8deg);
+  display:block;
+}
+
+/* subtle subtitle under the heading (if you want one) */
+.hod-form-container .subtitle {
+  color: #3b587e;
+  margin-bottom: 18px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* FORM GRID: two columns on wide, single on small */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 36px;
+  row-gap: 20px;
+  align-items: start;
+}
+
+/* Make some fields span full width (title, password area, buttons) */
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+/* Labels: subtle, uppercase-ish */
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: #13407a;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 0.4px;
+}
+
+/* Inputs: flat, with animated gradient underline on focus */
+input, select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 12px 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #d7e9ff; /* soft baseline */
+  outline: none;
+  font-size: 0.95rem;
+  color: #0b2540;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 160ms ease;
+}
+
+/* placeholder lighter */
+input::placeholder, select:placeholder-shown {
+  color: #9fb0c9;
+  font-weight: 500;
+}
+
+/* Focus underline: gradient + soft glow */
+input:focus, select:focus {
+  border-image: linear-gradient(90deg, #66a8ff, var(--blue-600)) 1;
+  box-shadow: 0 6px 18px rgba(15,78,214,0.06);
+  transform: translateY(-2px);
+}
+
+/* little arrow for select — keep flat */
+select {
+  background-image: linear-gradient(45deg, transparent 50%, #0f4ed6 50%),
+                    linear-gradient(135deg, #0f4ed6 50%, transparent 50%);
+  background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+
+/* Error text */
+.error {
+  color: var(--danger);
+  font-size: 0.82rem;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Subtle section dividers without cards */
+.section-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e6f0ff 40%, transparent);
+  margin: 8px 0 18px;
+}
+
+/* Buttons area - make it span full width and sticky/pill */
+.form-actions {
+  grid-column: 1 / -1;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:center;
+  margin-top: 8px;
+}
+
+/* Primary submit: pill, wide, modern */
+button[type="submit"]{
+  flex: 1 1 60%;
+  min-width: 240px;
+  max-width: 540px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, rgba(102,168,255,1), rgba(30,102,243,1));
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  font-size: 1.02rem;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(30,102,243,0.09);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+/* secondary cancel button */
+.cancel-btn {
+  background: transparent;
+  color: var(--blue-600);
+  border: 2px solid rgba(30,102,243,0.12);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* hover states */
+button[type="submit"]:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(30,102,243,0.12); }
+.cancel-btn:hover { background: rgba(30,102,243,0.06); transform: translateY(-2px); }
+
+/* Disabled look */
+button[disabled] { opacity: 0.65; cursor: not-allowed; transform:none; box-shadow:none; }
+
+/* RESPONSIVE: single-column on small screens */
+@media (max-width: 880px) {
+  .hod-form-container { padding: 18px; max-width: 720px; }
+  form { grid-template-columns: 1fr; column-gap: 0; }
+  .form-actions { justify-content: stretch; flex-direction: column; gap:10px; }
+  button[type="submit"] { width:100%; max-width:100%; }
+}
+
+/* make first input take visual focus when editing mode toggles */
+.hod-form-container input:focus { caret-color: var(--blue-600); }
+
+/* OPTIONAL: small animated dot accent to title for subtle motion */
+.hod-form-container h2::after{
+  content: "";
+  display:inline-block;
+  width:8px;
+  height:8px;
+  background: linear-gradient(45deg,#66a8ff,#1e66f3);
+  border-radius:50%;
+  margin-left:10px;
+  transform-origin:center;
+  animation: titlePulse 2400ms infinite;
+  opacity:0.95;
+}
+@keyframes titlePulse {
+  0% { transform: scale(1); opacity:0.95; }
+  50% { transform: scale(1.25); opacity:0.65; }
+  100% { transform: scale(1); opacity:0.95; }
+}
+/* ---------- Styled dropdown (select) ---------- */
+/* Use the form-scoped selector so it only affects your HOD form */
+.hod-form-container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  display: inline-block;
+  width: 100%;
+  padding: 12px 40px 12px 10px;      /* space for arrow on the right */
+  font-size: 0.95rem;
+  color: #0b2540;
+  background-color: transparent;     /* keep flat */
+  border: none;
+  border-bottom: 2px solid #d7e9ff;
+  border-radius: 8px;                /* subtle rounding for the control itself */
+  outline: none;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 160ms ease;
+  background-image:
+    /* chevron arrow SVG (data URI) */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%230f4ed6' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 14px) center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+
+/* larger hit area and subtle rounded highlight when hovered */
+.hod-form-container select:hover {
+  border-bottom-color: #c8e2ff;
+}
+
+/* Focus: gradient underline + soft glow */
+.hod-form-container select:focus {
+  border-image: linear-gradient(90deg, #66a8ff, var(--blue-600)) 1;
+  box-shadow: 0 6px 18px rgba(15,78,214,0.06);
+  transform: translateY(-2px);
+}
+
+/* If you want the default option text to look muted */
+.hod-form-container select option[disabled] {
+  color: #9fb0c9;
+}
+
+/* Try to style options (note: limited support in some browsers) */
+.hod-form-container select option {
+  padding: 10px;
+  background: #ffffff;
+  color: #0b2540;
+  font-weight: 600;
+}
+
+/* For Firefox: make the dropdown arrow align better */
+@-moz-document url-prefix() {
+  .hod-form-container select {
+    padding-right: 36px;
+    background-position: calc(100% - 10px) center;
+  }
+}
+
+/* If you want an alternative where the select looks like a pill (use this class on select) */
+.hod-form-container select.pill {
+  border-bottom: 0;
+  border: 1px solid rgba(15,78,214,0.08);
+  background: linear-gradient(180deg,#ffffff, #fbfdff);
+  padding: 10px 40px 10px 14px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* Accessibility: visible focus ring for keyboard users */
+.hod-form-container select:focus {
+  outline: 3px solid rgba(30,102,243,0.10);
+  outline-offset: 2px;
+}

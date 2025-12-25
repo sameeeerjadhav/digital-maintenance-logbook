@@ -1,0 +1,13 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h3>Student Panel</h3>
+    <ul>
+      <li (click)="navigate('add-log')">Add Log</li>
+      <li (click)="navigate('view-logs')">View My Logs</li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

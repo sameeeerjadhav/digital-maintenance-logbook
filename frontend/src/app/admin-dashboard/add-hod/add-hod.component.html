@@ -1,0 +1,59 @@
+<div class="hod-form-container">
+  <h2>{{ editMode ? 'Edit HOD' : 'Add HOD' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" placeholder="Enter full name" />
+      <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Name is required (min 2 characters)
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="example@college.com" />
+      <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Valid email required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select id="department" formControlName="department">
+        <option value="">-- Select Department --</option>
+        <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+      </select>
+      <div class="error" *ngIf="form.get('department')?.touched && form.get('department')?.invalid">
+        Department is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="collegeId">College ID</label>
+      <input id="collegeId" formControlName="collegeId" placeholder="Enter college ID" />
+      <div class="error" *ngIf="form.get('collegeId')?.touched && form.get('collegeId')?.invalid">
+        College ID is required
+      </div>
+    </div>
+
+    <!-- Password visible only when adding -->
+    <div class="form-group" *ngIf="!editMode">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" placeholder="Enter password" />
+      <div class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        Password must be at least 6 characters
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid || loading">
+      {{ editMode ? (loading ? 'Updating…' : 'Update HOD') : (loading ? 'Adding…' : 'Add HOD') }}
+    </button>
+
+    <button type="button" (click)="router.navigate(['/admin-dashboard/view-hods'])" class="cancel-btn">
+      Cancel
+    </button>
+
+    <p *ngIf="serverError" class="error">{{ serverError }}</p>
+  </form>
+</div>

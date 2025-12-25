@@ -1,0 +1,28 @@
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Admin Panel</h2>
+
+    <nav>
+      <p class="section">HOD Management</p>
+      <a routerLink="/admin-dashboard/add-hod" routerLinkActive="active">Add HOD</a>
+      <a routerLink="/admin-dashboard/view-hods" routerLinkActive="active">View HODs</a>
+
+      <p class="section">Student Management</p>
+      <a routerLink="/admin-dashboard/add-student" routerLinkActive="active">Add Student</a>
+      <a routerLink="/admin-dashboard/view-students" routerLinkActive="active">View Students</a>
+
+      <p class="section">Shared Modules</p>
+      <a routerLink="/admin-dashboard/add-device" routerLinkActive="active">Add Device</a>
+      <a routerLink="/admin-dashboard/view-device" routerLinkActive="active">View Devices</a>
+      <a routerLink="/admin-dashboard/add-log" routerLinkActive="active">Add Log</a>
+      <a routerLink="/admin-dashboard/view-logs" routerLinkActive="active">View Logs</a>
+      <a routerLink="/admin-dashboard/qr-scan" routerLinkActive="active">QR Scan</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

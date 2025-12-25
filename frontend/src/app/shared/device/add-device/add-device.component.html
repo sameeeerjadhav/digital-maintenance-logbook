@@ -1,0 +1,38 @@
+<div class="form-container">
+  <h2>Add Device</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <label>Device Name</label>
+    <input type="text" [(ngModel)]="device.deviceName" name="deviceName" required />
+
+    <label>Device Type</label>
+    <select [(ngModel)]="device.deviceType" name="deviceType" required>
+      <option *ngFor="let type of deviceTypes" [value]="type">{{ type }}</option>
+    </select>
+
+    <label>Serial Number</label>
+    <input type="text" [(ngModel)]="device.serialNumber" name="serialNumber" required />
+
+    <label>Lab Name</label>
+    <input type="text" [(ngModel)]="device.labName" name="labName" required />
+
+    <label>Status</label>
+    <select [(ngModel)]="device.status" name="status" required>
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+
+    <button type="submit" class="btn" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save Device & Generate QR' }}
+    </button>
+    <button type="button" class="btn" (click)="resetForm()">Reset</button>
+  </form>
+
+  <div *ngIf="message" class="success-msg">{{ message }}</div>
+
+  <!-- ✅ Show QR image and download option -->
+  <div *ngIf="qrImageUrl" class="qr-section">
+    <h3>Generated QR Code</h3>
+    <img [src]="qrImageUrl" alt="QR Code" class="qr-image" />
+    <button class="btn download-btn" (click)="downloadQR()">Download QR</button>
+  </div>
+</div>

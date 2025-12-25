@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="section hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="tone-1">Manage Campus.</span>
+          <span class="tone-2">The Smart Way.</span>
+        </h1>
+
+        <p class="subtitle">
+          A unified portal for departments, faculty, and administration — fast, secure, and delightful.
+        </p>
+
+        <div class="cta">
+          <a class="btn solid" routerLink="/signup">Get Started</a>
+          <a class="btn ghost account-btn" routerLink="/login">I already have an account</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="stat">
+          <div class="num">10×</div>
+          <div class="label">Faster onboarding</div>
+        </div>
+        <div class="stat">
+          <div class="num">99.9%</div>
+          <div class="label">Uptime</div>
+        </div>
+        <div class="stat">
+          <div class="num">RBAC</div>
+          <div class="label">Secure access</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <p class="lead">
+        We streamline academic workflows with role-based dashboards, real-time logs, and elegant UI.
+        From HOD forms to device maintenance tracking — everything in one place.
+      </p>
+
+      <div class="features">
+        <div class="card">
+          <h3>All-in-One</h3>
+          <p>HOD & faculty modules, appointments, orders, and more in a single pane of glass.</p>
+        </div>
+
+        <div class="card">
+          <h3>Secure by Design</h3>
+          <p>JWT auth, role-based access, and audit history keep your data safe and compliant.</p>
+        </div>
+
+        <div class="card">
+          <h3>Made for Speed</h3>
+          <p>Angular, lazy routes, and clean APIs deliver snappy, modern UX on any device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="subtitle">Have a question or want a demo? Drop a message.</p>
+
+      <form class="contact-form" (submit)="$event.preventDefault()">
+        <div class="row">
+          <div class="field">
+            <label for="name">Your Name</label>
+            <input id="name" type="text" placeholder="e.g., Sameer Jadhav" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="msg">Message</label>
+          <textarea id="msg" rows="5" placeholder="Tell us what you need..." required></textarea>
+        </div>
+
+        <button class="btn solid" type="submit">Send Message</button>
+      </form>
+
+      <p class="mini">
+        Or email us at
+        <a href="mailto:hello@yourbrand.com">sameerpjadhavbrand.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <!-- <footer class="footer">
+    <div class="container foot-grid">
+      <div>© {{ (new Date()).getFullYear() }} QRBasedSystem</div>
+      <div class="foot-links"> -->
+        <!-- Using click handlers to scroll, but you can change to routerLink if you prefer dedicated pages -->
+        <!--<a (click)="document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })">Home</a>
+        <a (click)="document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })">About</a>
+        <a (click)="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })">Contact</a>
+      </div>
+    </div>
+  </footer> -->
+</main>

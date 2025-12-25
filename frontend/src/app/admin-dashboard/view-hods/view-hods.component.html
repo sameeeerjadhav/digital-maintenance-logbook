@@ -1,0 +1,47 @@
+<div class="view-hods-container">
+  <div class="header">
+    <h2>View HODs</h2>
+    <div class="actions">
+      <button (click)="loadHods()" [disabled]="loading">
+        {{ loading ? 'Refreshing…' : 'Refresh' }}
+      </button>
+      <a routerLink="/admin-dashboard/add-hod" class="add-btn">+ Add HOD</a>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+  <div *ngIf="loading" class="loading">Loading HODs…</div>
+
+  <table *ngIf="!loading && hodList && hodList.length > 0" class="hod-table">
+    <thead>
+      <tr>
+        <th style="width:80px;">ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th style="width:140px;">College ID</th>
+        <th style="width:180px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of hodList">
+        <td>{{ h.id }}</td>
+        <td>{{ h.name }}</td>
+        <td>
+          <a *ngIf="h.email; else noEmail" [href]="'mailto:' + h.email">{{ h.email }}</a>
+          <ng-template #noEmail>—</ng-template>
+        </td>
+        <td>{{ h.department }}</td>
+        <td>{{ h.collegeId || '—' }}</td>
+        <td class="actions-cell">
+          <button class="edit-btn" (click)="editHod(h.id)">Edit</button>
+          <button class="delete-btn" (click)="deleteHod(h.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && (!hodList || hodList.length === 0)" class="empty">
+    No HODs found. Add a new one.
+  </div>
+</div>

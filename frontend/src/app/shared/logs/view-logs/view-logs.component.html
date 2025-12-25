@@ -1,0 +1,83 @@
+<div class="view-container">
+  <h2>Maintenance Logs</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by machine, device, issue, status, or date"
+    />
+  </div>
+
+  <div *ngIf="loading" class="info">Loading logs…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="!loading && filteredLogs.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Machine</th>
+        <th>Device</th>
+        <th>Issue</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Faculty</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let log of filteredLogs">
+        <td>{{ log.id }}</td>
+        <td>{{ log.machineName }}</td>
+
+        <!-- Device Name -->
+        <td>{{ getDeviceLabel(log) }}</td>
+
+        <!-- Issue -->
+        <td>{{ log.issueDescription }}</td>
+
+        <!-- Status -->
+        <td>
+          <span
+            [ngClass]="{
+              pending: log.status === 'PENDING',
+              progress: log.status === 'IN_PROGRESS',
+              completed: log.status === 'COMPLETED'
+            }"
+          >
+            {{ log.status }}
+          </span>
+        </td>
+
+        <!-- Date -->
+        <td>{{ log.maintenanceDate | date: 'mediumDate' }}</td>
+
+        <!-- Faculty -->
+        <td>{{ getFacultyLabel(log) }}</td>
+
+        <!-- Image -->
+        <td>
+          <ng-container *ngIf="imageSrc(log); else noImage">
+            <img
+              [src]="imageSrc(log)!"
+              alt="attachment"
+              style="width:48px;height:48px;object-fit:cover;border:1px solid #eee;border-radius:4px;"
+            />
+          </ng-container>
+          <ng-template #noImage>—</ng-template>
+        </td>
+
+        <!-- Actions -->
+        <td>
+          <button class="delete-btn" (click)="deleteLog(log.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && filteredLogs.length === 0" class="no-data">
+    No logs found
+  </div>
+</div>

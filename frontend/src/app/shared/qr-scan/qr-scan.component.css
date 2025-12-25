@@ -1,0 +1,226 @@
+.qr-card {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.12);
+  border-top: 5px solid #1e40af;
+}
+h2 { text-align: center; color: #1e3a8a; margin-bottom: 16px; }
+
+.qr-reader {
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.result {
+  margin-top: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+}
+.result h3 { margin: 0 0 8px 0; color: #1f2937; }
+code {
+  display: block;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.actions { margin-top: 12px; display: flex; gap: 10px; }
+.btn {
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover { background: #1d4ed8; }
+.btn.outline {
+  background: transparent;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+}
+.err { color: #ef4444; margin-top: 10px; font-size: 0.9rem; }
+/* Wrapper card */
+.qr-scan {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.12);
+  border-top: 5px solid #1e40af;
+  animation: fadeInQr .25s ease-out;
+}
+
+/* Title */
+.qr-scan h2 {
+  text-align: center;
+  color: #1e3a8a;
+  margin: 0 0 16px;
+}
+
+/* Reader box */
+.qr-reader {
+  margin: 0 auto;
+  max-width: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #ffffff; /* many libraries inject their own UI; this frames it */
+}
+
+/* Status area */
+.status {
+  margin-top: 12px;
+  text-align: center;
+  min-height: 24px;
+  color: #374151;
+  font-size: 14px;
+}
+
+/* Alerts */
+.alert {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: left;
+  display: inline-block;
+}
+.alert.error {
+  background: #fee2e2;
+  border-left: 4px solid #b91c1c;
+  color: #991b1b;
+}
+
+/* Result payload */
+.result {
+  margin-top: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  color: #111827;
+  word-break: break-word;
+}
+.result p { margin: 0; }
+.result strong { color: #1f2937; }
+
+/* Matched device block */
+.match {
+  margin-top: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+}
+.match h3 {
+  margin: 0 0 8px;
+  color: #1f2937;
+}
+.match ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  color: #374151;
+}
+.match li { margin: 4px 0; }
+
+/* Actions */
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Controls row (restart) */
+.controls {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Buttons */
+button.primary,
+button.secondary,
+button.ghost {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background .2s, color .2s, border-color .2s, transform .15s, opacity .2s;
+}
+
+/* Primary */
+button.primary {
+  background: #1e40af;
+  color: #fff;
+}
+button.primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Secondary (outlined) */
+button.secondary {
+  background: transparent;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+}
+button.secondary:hover {
+  background: #1e40af;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Ghost (subtle) */
+button.ghost {
+  background: transparent;
+  color: #374151;
+  border: 1px dashed #cbd5e1;
+}
+button.ghost:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+/* Disabled */
+button.primary:disabled,
+button.secondary:disabled,
+button.ghost:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Optional code style (if you log raw payloads) */
+code {
+  display: block;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .qr-scan { padding: 18px; }
+  .actions { justify-content: center; }
+  .qr-reader { max-width: 100%; }
+}
+
+/* Subtle entry animation */
+@keyframes fadeInQr {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
